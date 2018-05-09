@@ -1,19 +1,28 @@
 <?php 
 function approve_booking(){
 require 'PHPMailer/PHPMailerAutoload.php';
+include 'dbconfig.php';
 //$allow=$_POST['allow'];
 //$deny=$_POST['deny'];
 session_start();
 
-$crname=$_COOKIE['crname'];
+/*$crname=$_COOKIE['crname'];
 //$cname=$_COOKIE['cname'];
 $cdate=$_COOKIE['cdate'];
 $cstime=$_COOKIE['cstime'];
 $cetime=$_COOKIE['cetime'];
 
 $cemail=$_COOKIE['email_id'];
-$title=$_COOKIE['ctitle'];
+$title=$_COOKIE['ctitle'];*/
 
+$query="select * from booking";
+$result=mysqli_query($con,$query);
+$row=mysqli_fetch_assoc($result);
+$crname=$row['crname'];
+$cdate=$row['cdate'];
+$cstime=$row['cstime'];
+$cetime=$row['cetime'];
+$cemail=$row['email_id'];
 
 
 
@@ -50,21 +59,27 @@ else if(isset($_POST['deny']))
 		$flag=0;
 		
 	}
+	$dquery="truncate table booking";
+	mysqli_query($con,$dquery);
 	if(!$mail->send()) {
     echo 'Message could not be sent.';
     echo 'Mailer Error: ' . $mail->ErrorInfo;
 	} 
 	else {
+
     	echo 'Message has been sent';
+    	
 	}
 	if($flag==1)
 	{
+
 		return true;
 	}	
 	else
 	{
 		return false;
 	}
+
 
 }
 

@@ -1,6 +1,7 @@
 <?php
 function notify(){
 require 'PHPMailer/PHPMailerAutoload.php';
+include 'dbconfig.php';
 
 
 if($_SESSION['rsc_name']=="czone5"){
@@ -28,8 +29,6 @@ setcookie("cdate",$date,time()+(86400*7),"/");
 setcookie("ctitle",$title,time()+(86400*7),"/");
 setcookie("cstart",$_SESSION['start'],time()+(86400*7),"/");
 setcookie("cend",$_SESSION['end'],time()+(86400*7),"/");
-
-
 
 
 $mail = new PHPMailer;
@@ -62,7 +61,7 @@ $mail->Body    = '<!DOCTYPE html>
 </head>
 <body>
 <p>Booking request for '.$rname.' on '.$date.' from '.$stime.' to '.$etime.' for '.$title.' by '.$name.'</p>
-<form action="http://localhost/designlab/approve.php" method="POST">
+<form action="https://fb222952.ngrok.io/designlab/approve.php" method="POST">
 <input type="submit" class="button" name="allow" value="ALLOW">
 <input type="submit" class="button" name="deny" value="DENY">
 
@@ -72,6 +71,8 @@ $mail->Body    = '<!DOCTYPE html>
 </html>';
 $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
+
+
 if(!$mail->send()) {
     echo 'Message could not be sent.';
     echo 'Mailer Error: ' . $mail->ErrorInfo;
@@ -79,8 +80,23 @@ if(!$mail->send()) {
 } 
 else {
     echo 'Message has been sent';
-    
-}
+    }
+
+$date=mysql_real_escape_string($date);
+$rname=mysql_real_escape_string($rname);
+$stime=mysql_real_escape_string($stime);
+$etime=mysql_real_escape_string($etime);
+$email_id=mysql_real_escape_string($_COOKIE['email_id']);
+
+$query="INSERT INTO booking(crname,cdate,cstime,cetime,email_id) VALUES ('$rname','$date','$stime','$etime','$email_id')";
+mysqli_query($con,$query);
+
+
+
+
+
+
+
 }
 
 ?>

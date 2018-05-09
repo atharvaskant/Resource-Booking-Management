@@ -20,22 +20,7 @@ if(isset($_POST['action']) or isset($_GET['view'])) //show all events
         echo json_encode($events); 
         exit;
     }
-    elseif($_POST['action'] == "add") // add new event
-    {
-                  mysqli_query($con,"INSERT INTO $resource(
-                        title ,
-                        start ,
-                        end 
-                        )
-                        VALUES (
-                        '".mysqli_real_escape_string($con,$_POST["title"])."',
-                        '".mysqli_real_escape_string($con,date('Y-m-d H:i:s',strtotime($_POST["start"])))."',
-                        '".mysqli_real_escape_string($con,date('Y-m-d H:i:s',strtotime($_POST["end"])))."'
-                        )");
-            header('Content-Type: application/json');
-            echo '{"id":"'.mysqli_insert_id($con).'"}';
-            exit;
-    }
+    
 }
 
 ?>

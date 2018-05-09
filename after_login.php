@@ -33,7 +33,7 @@ setcookie("email_id",$_SESSION['emailid'],time()+(86400*7),"/");
 </head>
 <body background="2.jpg">
 </br>  </br>
-<center><font color="green" size="24">Welcome Mr User</font></center> </br>  </br>   </br>  </br> </br>  </br>  </br>  </br>
+<center><font color="green" size="24">Welcome User</font></center> </br>  </br>   </br>  </br> </br>  </br>  </br>  </br>
 
 <center><a href="bookingui.php"><button type="button" class="button" >Book Resource</button></a></center> </br> </br> </br> </br> </br> </br>  </br>
 

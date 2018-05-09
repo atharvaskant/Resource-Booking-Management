@@ -57,11 +57,27 @@
         }
         return true;
     }
+    
+
+    function check(){
+      
+      var x=document.getElementById("status");
+      if(x.value===""){
+        alert("Please select resource");
+      }
+      else{
+        document.getElementById("form1").submit();
+      }
+    }
+
+
+
     </script> 
+
   
 </head>
 <body background="2.jpg">
-<form action="bcalendar.php" method="POST">
+<form action="bcalendar.php" method="POST" id="form1">
 <center>
 
 <table>
@@ -77,14 +93,15 @@
   <tr><td>
     <div class="sub_category_div" id="sub_category_div"><b>Book Resource:</b>
         <script type="text/javascript" language="JavaScript">
-        document.write('<select name="rsc_name" id="status"><option value="">Select</option></select>')
+        document.write('<select name="rsc_name" id="status"><option value="" id="status1">Select</option></select>')
         </script>
 </tr></td>
 
 
 
 </table>
- <button type="submit" class="button" name="submit"><span>Submit </span></button>
+<br><br>
+ <buttons class="button" name="submit" onclick="javascript: check()"><span>Submit </span></button>
 </center>
 </form>
 

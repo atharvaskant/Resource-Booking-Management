@@ -2,7 +2,9 @@
 <?php
 session_start();
 $_SESSION['rsc_name']=$_POST['rsc_name'];
+$_SESSION['type']=$_POST['rsc_type'];
 setcookie("crsc_name",$_SESSION['rsc_name'],time()+(86400*7),"/");
+
 
 
 ?>
